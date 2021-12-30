@@ -16,6 +16,8 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
+import { checkIn } from "../../api/form"
+
 import Back from "../../assets/checkin.jpeg"
 
 import "./CheckInForm.scss"
@@ -23,17 +25,51 @@ import "./CheckInForm.scss"
 const CheckInForm = () => {
     let history = useHistory()
 
+    const [enteredData, setEnteredData] = useState({
+        firstName: "",
+        lastName: "",
+        date: "",
+        town: ''
+
+    })
+
     const [date, setDate] = useState(new Date())
-    const [age, setAge] = React.useState('');
+
     const handleChange = (event) => {
-        setAge(event.target.value);
+        let { name, value } = event.target
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                [name]: value
+            }
+        })
     };
+    const enteringData = (event) => {
+        let { name, value } = event.target
+
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                [name]: value
+            }
+        })
+    }
     const enteringDate = (value) => {
         setDate(value)
+        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                date: createTime
+            }
+        })
     }
 
-    const go = () => {
-        history.push("/")
+    const go = async () => {
+        let res = await checkIn(enteredData)
+        if (res.error != null) {
+            alert("Error")
+        }
     }
 
     return (
@@ -50,10 +86,10 @@ const CheckInForm = () => {
                         </div>
 
                         <div className="one">
-                            <TextField className="input" variant="outlined" label="Vorname" />
+                            <TextField name='firstName' value={enteredData.firstName} onChange={enteringData} className="input" variant="outlined" label="Vorname" />
                         </div>
                         <div className="one">
-                            <TextField className="input" variant="outlined" label="Nachname" />
+                            <TextField name='lastName' value={enteredData.lastName} onChange={enteringData} className="input" variant="outlined" label="Nachname" />
                         </div>
                         <div className="one">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -68,17 +104,18 @@ const CheckInForm = () => {
                         </div>
                         <div className="one">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Standort</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
-                                    label="Auswählen"
+                                    value={enteredData.town}
+                                    label="Standort"
                                     onChange={handleChange}
+                                    name='town'
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
+                                    <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
+                                    <MenuItem value={"Quellental - Pinneberg"}>Quellental - Pinneberg</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom"
+
 import TextField from "@mui/material/TextField/TextField"
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -19,24 +20,86 @@ import PhoneInput from 'react-phone-number-input'
 
 import Back from "../../assets/registration.jpeg"
 
+import { register } from "../../api/form"
+
 import "./RegisterForm.scss"
 
 const RegisterForm = () => {
     let history = useHistory()
 
+    const [enteredData, setEnteredData] = useState({
+        name: "",
+        full_name: "",
+
+        first_name: "",
+        last_name: "",
+        email: "",
+        id_number: "",
+        street: "",
+        street_number: "",
+        zip_code: '',
+        towncity: "",
+        report_preference: "",
+        test_name: "",
+
+        date_of_birth: '',
+        phone_number: "",
+
+        create_lab_test: "1",
+        appointment: null,
+        active_subscription: 'Active'
+
+    })
+
     const [date, setDate] = useState(new Date())
     const [number, setNumber] = useState("")
-    const [age, setAge] = React.useState('');
-    const handleChange = (event) => {
-        setAge(event.target.value);
+
+    const enteringSelect = (event) => {
+        let { name, value } = event.target
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                [name]: value
+            }
+        })
     };
-    const enteringDate = (value) => {
-        setDate(value)
+    const enteringData = (event) => {
+        let { name, value } = event.target
+
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                [name]: value
+            }
+        })
     }
 
-    const go = () => {
-        history.push("/checkin")
+    const enteringDate = (value) => {
+        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                date_of_birth: createTime
+            }
+        })
+        setDate(value)
     }
+    const enteringNumber = (value) => {
+        setEnteredData((preValue) => {
+            return {
+                ...preValue,
+                phone_number: value
+            }
+        })
+    }
+
+    const go = async () => {
+        let res = await register(enteredData)
+        if (res.error != null) {
+            alert("error")
+        }
+    }
+
 
     return (
         <>
@@ -53,27 +116,28 @@ const RegisterForm = () => {
                         </div>
                         <div className="one">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Standort</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
-                                    label="Auswählen"
-                                    onChange={handleChange}
+                                    value={enteredData.towncity}
+                                    label="Standort"
+                                    onChange={enteringSelect}
+                                    name='towncity'
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
+                                    <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
+                                    <MenuItem value={"Quellental - Pinneberg"}>Quellental - Pinneberg</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="Vorname" />
-                            <TextField className="input" variant="outlined" label="Nachname" />
+                            <TextField onChange={enteringData} value={enteredData.first_name} name='first_name' className="input" variant="outlined" label="Vorname" />
+                            <TextField onChange={enteringData} value={enteredData.last_name} name='last_name' className="input" variant="outlined" label="Nachname" />
                         </div>
                         <div className="group">
-                            <PhoneInput placeholder='Handynummer' className='phone_input' value={number} onChange={setNumber} defaultCountry='US' />
-                            <TextField className="input" variant="outlined" label="Email" />
+                            <PhoneInput placeholder='Handynummer' className='phone_input' value={enteredData.phone_number} onChange={enteringNumber} defaultCountry='DE' />
+                            <TextField onChange={enteringData} value={enteredData.email} name='email' className="input" variant="outlined" label="Email" />
                         </div>
                         <div className="group">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -85,14 +149,14 @@ const RegisterForm = () => {
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
                             </LocalizationProvider>
-                            <TextField className="input" variant="outlined" label="Personalausweisnummer" />
+                            <TextField onChange={enteringData} value={enteredData.id_number} name='id_number' className="input" variant="outlined" label="Personalausweisnummer" />
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="Straße" />
-                            <TextField className="input" variant="outlined" label="Hausnummer" />
+                            <TextField onChange={enteringData} value={enteredData.street} name="street" className="input" variant="outlined" label="Straße" />
+                            <TextField onChange={enteringData} value={enteredData.street_number} name="street_number" className="input" variant="outlined" label="Hausnummer" />
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="PLZ" type={"number"} />
+                            <TextField onChange={enteringData} value={enteredData.zip_code} name="zip_code" className="input" variant="outlined" label="PLZ" type={"number"} />
                             <TextField className="input" variant="outlined" label="Wohnort" />
                         </div>
                         <div className="group">
@@ -101,13 +165,12 @@ const RegisterForm = () => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
+                                    value={enteredData.test_name}
                                     label="Leistung"
-                                    onChange={handleChange}
+                                    onChange={enteringSelect}
+                                    name='test_name'
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={"Antigen Schnelltest"}>Antigen Schnelltest</MenuItem>
                                 </Select>
                             </FormControl>
                             <FormControl fullWidth>
@@ -115,13 +178,14 @@ const RegisterForm = () => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
+                                    value={enteredData.report_preference}
                                     label="Benachrichtigungsart"
-                                    onChange={handleChange}
+                                    onChange={enteringSelect}
+                                    name='report_preference'
                                 >
-                                    <MenuItem value={10}>E-Mail</MenuItem>
-                                    <MenuItem value={20}>SMS</MenuItem>
-                                    <MenuItem value={30}>Print</MenuItem>
+                                    <MenuItem value={"E-Mail"}>E-Mail</MenuItem>
+                                    <MenuItem value={"SMS"}>SMS</MenuItem>
+                                    <MenuItem value={"Print"}>Print</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
