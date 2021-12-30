@@ -36,6 +36,7 @@ const RegisterForm = () => {
         first_name: "",
         last_name: "",
         email: "",
+        cemail: "",
         id_number: "",
         street: "",
         street_number: "",
@@ -49,11 +50,31 @@ const RegisterForm = () => {
 
         create_lab_test: "1",
         appointment: null,
-        active_subscription: 'Active'
+        active_subscription: 'Active',
+
+        place: ""
 
     })
+    const [error, setError] = useState({
+        first_name: false,
+        last_name: false,
+        email: false,
+        cemail: false,
+        id_number: false,
+        street: false,
+        street_number: false,
+        zip_code: false,
+        towncity: false,
+        report_preference: false,
+        test_name: false,
 
-    const [date, setDate] = useState(new Date())
+        date_of_birth: false,
+        phone_number: false,
+
+        place: false
+    })
+
+    const [date, setDate] = useState("")
     const [number, setNumber] = useState("")
 
     const enteringSelect = (event) => {
@@ -67,7 +88,6 @@ const RegisterForm = () => {
     };
     const enteringData = (event) => {
         let { name, value } = event.target
-
         setEnteredData((preValue) => {
             return {
                 ...preValue,
@@ -84,7 +104,6 @@ const RegisterForm = () => {
                 date_of_birth: createTime
             }
         })
-        setDate(value)
     }
     const enteringNumber = (value) => {
         setEnteredData((preValue) => {
@@ -106,6 +125,246 @@ const RegisterForm = () => {
                 draggable: true,
                 progress: undefined,
             });
+
+            if (!enteredData.first_name) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        first_name: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        first_name: false
+                    }
+                })
+            }
+
+            if (!enteredData.last_name) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        last_name: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        last_name: false
+                    }
+                })
+            }
+
+            // if (!enteredData.last_name) {
+            //     setError((preValue) => {
+            //         return {
+            //             ...preValue,
+            //             last_name: "This field is required."
+            //         }
+            //     })
+            // }else{
+            //     setError((preValue)=>{
+            //         return{
+            //             ...preValue,
+            //             first_name:false
+            //         }
+            //     })
+            // }
+
+            if (!enteredData.email) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        email: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        email: false
+                    }
+                })
+            }
+
+            if (!enteredData.cemail || (enteredData.email != enteredData.cemail)) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        cemail: "Email doesn't match"
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        cemail: false
+                    }
+                })
+            }
+            // if (enteredData.email != enteredData.cemail) {
+            //     setError((preValue) => {
+            //         return {
+            //             ...preValue,
+            //             cemail: "Email doesn't match"
+            //         }
+            //     })
+            // } else {
+            //     setError((preValue) => {
+            //         return {
+            //             ...preValue,
+            //             cemail: false
+            //         }
+            //     })
+            // }
+
+            if (!enteredData.id_number) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        id_number: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        id_number: false
+                    }
+                })
+            }
+
+            if (!enteredData.street) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        street: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        street: false
+                    }
+                })
+            }
+
+            if (!enteredData.street_number) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        street_number: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        street_number: false
+                    }
+                })
+            }
+
+            if (!enteredData.zip_code) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        zip_code: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        zip_code: false
+                    }
+                })
+            }
+
+            if (!enteredData.towncity) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        towncity: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        towncity: false
+                    }
+                })
+            }
+
+            if (!enteredData.report_preference) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        report_preference: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        report_preference: false
+                    }
+                })
+            }
+
+            if (!enteredData.test_name) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        test_name: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        test_name: false
+                    }
+                })
+            }
+
+            if (!enteredData.date_of_birth) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        date_of_birth: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        date_of_birth: false
+                    }
+                })
+            }
+
+            if (!enteredData.place) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        place: "This field is required."
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        place: false
+                    }
+                })
+            }
+
         } else {
             let res = await register(enteredData)
             if (res.error != null) {
@@ -135,6 +394,7 @@ const RegisterForm = () => {
                     first_name: "",
                     last_name: "",
                     email: "",
+                    cemail: "",
                     id_number: "",
                     street: "",
                     street_number: "",
@@ -181,6 +441,14 @@ const RegisterForm = () => {
                             ANMELDUNG FORM
                         </div>
                         <div className="one">
+
+                        </div>
+                        <div className="group">
+                            <TextField error={error.first_name} onChange={enteringData} value={enteredData.first_name} name='first_name' className="input" variant="outlined" label="Vorname" />
+                            <TextField error={error.last_name} onChange={enteringData} value={enteredData.last_name} name='last_name' className="input" variant="outlined" label="Nachname" />
+                        </div>
+                        <div className="group">
+                            <PhoneInput placeholder='Handynummer' className='phone_input' value={enteredData.phone_number} onChange={enteringNumber} defaultCountry='DE' />
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Standort</InputLabel>
                                 <Select
@@ -190,6 +458,7 @@ const RegisterForm = () => {
                                     label="Standort"
                                     onChange={enteringSelect}
                                     name='towncity'
+                                    error={error.towncity}
                                 >
                                     <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
                                     <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
@@ -198,32 +467,31 @@ const RegisterForm = () => {
                             </FormControl>
                         </div>
                         <div className="group">
-                            <TextField onChange={enteringData} value={enteredData.first_name} name='first_name' className="input" variant="outlined" label="Vorname" />
-                            <TextField onChange={enteringData} value={enteredData.last_name} name='last_name' className="input" variant="outlined" label="Nachname" />
-                        </div>
-                        <div className="group">
-                            <PhoneInput placeholder='Handynummer' className='phone_input' value={enteredData.phone_number} onChange={enteringNumber} defaultCountry='DE' />
-                            <TextField onChange={enteringData} value={enteredData.email} name='email' className="input" variant="outlined" label="Email" />
+                            <TextField error={error.email} onChange={enteringData} value={enteredData.email} name='email' className="input" variant="outlined" label="Email" />
+                            <div className="cemail_b">
+                                <TextField error={error.cemail} onChange={enteringData} value={enteredData.cemail} name='cemail' className="input" variant="outlined" label="Confirm Email" />
+                                {error.cemail && <p> {error.cemail} </p>}
+                            </div>
                         </div>
                         <div className="group">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
                                     label="Geburtsdatum"
-                                    inputFormat="MM/dd/yyyy"
-                                    value={date}
+                                    inputFormat="dd/MM/yyyy"
+                                    value={enteredData.date_of_birth}
                                     onChange={enteringDate}
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
                             </LocalizationProvider>
-                            <TextField onChange={enteringData} value={enteredData.id_number} name='id_number' className="input" variant="outlined" label="Personalausweisnummer" />
+                            <TextField error={error.id_number} onChange={enteringData} value={enteredData.id_number} name='id_number' className="input" variant="outlined" label="Personalausweisnummer" />
                         </div>
                         <div className="group">
-                            <TextField onChange={enteringData} value={enteredData.street} name="street" className="input" variant="outlined" label="Straße" />
-                            <TextField onChange={enteringData} value={enteredData.street_number} name="street_number" className="input" variant="outlined" label="Hausnummer" />
+                            <TextField error={error.street} onChange={enteringData} value={enteredData.street} name="street" className="input" variant="outlined" label="Straße" />
+                            <TextField error={error.street_number} onChange={enteringData} value={enteredData.street_number} name="street_number" className="input" variant="outlined" label="Hausnummer" />
                         </div>
                         <div className="group">
-                            <TextField onChange={enteringData} value={enteredData.zip_code} name="zip_code" className="input" variant="outlined" label="PLZ" type={"number"} />
-                            <TextField className="input" variant="outlined" label="Wohnort" />
+                            <TextField error={error.zip_code} onChange={enteringData} value={enteredData.zip_code} name="zip_code" className="input" variant="outlined" label="PLZ" type={"number"} />
+                            <TextField error={error.place} name='place' onChange={enteringData} className="input" variant="outlined" label="Wohnort" />
                         </div>
                         <div className="group">
                             <FormControl fullWidth>
@@ -235,6 +503,7 @@ const RegisterForm = () => {
                                     label="Leistung"
                                     onChange={enteringSelect}
                                     name='test_name'
+                                    error={error.test_name}
                                 >
                                     <MenuItem value={"Antigen Schnelltest"}>Antigen Schnelltest</MenuItem>
                                 </Select>
@@ -248,6 +517,7 @@ const RegisterForm = () => {
                                     label="Benachrichtigungsart"
                                     onChange={enteringSelect}
                                     name='report_preference'
+                                    error={error.report_preference}
                                 >
                                     <MenuItem value={"E-Mail"}>E-Mail</MenuItem>
                                     <MenuItem value={"SMS"}>SMS</MenuItem>
@@ -267,7 +537,7 @@ const RegisterForm = () => {
                                 </FormGroup>
                             </div>
                         </div>
-                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > abschicken </Button>
+                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem", width: "200px", alignSelf: "center" }} onClick={go} > abschicken </Button>
                     </div>
                 </div>
             </div>

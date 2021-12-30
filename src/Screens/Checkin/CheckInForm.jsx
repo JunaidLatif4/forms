@@ -34,7 +34,10 @@ const CheckInForm = () => {
         town: ''
     })
 
-    const [date, setDate] = useState(new Date())
+    const [error, setError] = useState({
+        date: false,
+        town: false
+    })
 
     const handleChange = (event) => {
         let { name, value } = event.target
@@ -56,7 +59,6 @@ const CheckInForm = () => {
         })
     }
     const enteringDate = (value) => {
-        setDate(value)
         let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
         setEnteredData((preValue) => {
             return {
@@ -67,7 +69,7 @@ const CheckInForm = () => {
     }
 
     const go = async () => {
-        if (!enteredData.firstName || !enteredData.lastName || !enteredData.date || !enteredData.town) {
+        if (!enteredData.date || !enteredData.town) {
             toast.warn('Please fill all the fields Carefully', {
                 position: "top-right",
                 autoClose: 5000,
@@ -77,6 +79,40 @@ const CheckInForm = () => {
                 draggable: true,
                 progress: undefined,
             });
+
+            if (!enteredData.date) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        date: "The Field is required"
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        date: false
+                    }
+                })
+            }
+
+            if (!enteredData.town) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        town: "The Field is required"
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        town: false
+                    }
+                })
+            }
+
+
         } else {
 
             let res = await checkIn(enteredData)
@@ -145,8 +181,8 @@ const CheckInForm = () => {
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
                                     label="Geburtsdatum"
-                                    inputFormat="MM/dd/yyyy"
-                                    value={date}
+                                    inputFormat="dd/MM/yyyy"
+                                    value={enteredData.date}
                                     onChange={enteringDate}
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
@@ -162,6 +198,7 @@ const CheckInForm = () => {
                                     label="Standort"
                                     onChange={handleChange}
                                     name='town'
+                                    error={error.town}
                                 >
                                     <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
                                     <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
@@ -169,7 +206,7 @@ const CheckInForm = () => {
                                 </Select>
                             </FormControl>
                         </div>
-                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > abschicken </Button>
+                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" , width:"200px" , alignSelf:"center" }} onClick={go} > abschicken </Button>
                     </div>
                 </div>
             </div>
