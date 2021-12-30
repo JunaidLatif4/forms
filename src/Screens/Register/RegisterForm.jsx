@@ -43,22 +43,22 @@ const RegisterForm = () => {
             <div className="registerform_container">
                 <div className="header">
                     <img src={Back} alt="ERROR" />
-                    <p> Registration </p>
+                    <p> Anmeldung </p>
                 </div>
 
                 <div className="backcolor">
                     <div className="form">
                         <div className="title">
-                            REGISTRATION FORM
+                            ANMELDUNG FORM
                         </div>
                         <div className="one">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Location</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={age}
-                                    label="Location"
+                                    label="Auswählen"
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={10}>Ten</MenuItem>
@@ -68,41 +68,41 @@ const RegisterForm = () => {
                             </FormControl>
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="First Name" />
-                            <TextField className="input" variant="outlined" label="Last Name" />
+                            <TextField className="input" variant="outlined" label="Vorname" />
+                            <TextField className="input" variant="outlined" label="Nachname" />
                         </div>
                         <div className="group">
-                            <PhoneInput placeholder='Enter phone number' className='phone_input' value={number} onChange={setNumber} defaultCountry='US' />
+                            <PhoneInput placeholder='Handynummer' className='phone_input' value={number} onChange={setNumber} defaultCountry='US' />
                             <TextField className="input" variant="outlined" label="Email" />
                         </div>
                         <div className="group">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
-                                    label="Date of Birth"
+                                    label="Geburtsdatum"
                                     inputFormat="MM/dd/yyyy"
                                     value={date}
                                     onChange={enteringDate}
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
                             </LocalizationProvider>
-                            <TextField className="input" variant="outlined" label="ID Number" />
+                            <TextField className="input" variant="outlined" label="Personalausweisnummer" />
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="Street" />
-                            <TextField className="input" variant="outlined" label="House Number" />
+                            <TextField className="input" variant="outlined" label="Straße" />
+                            <TextField className="input" variant="outlined" label="Hausnummer" />
                         </div>
                         <div className="group">
-                            <TextField className="input" variant="outlined" label="ZIP" type={"number"} />
-                            <TextField className="input" variant="outlined" label="Place of residence" />
+                            <TextField className="input" variant="outlined" label="PLZ" type={"number"} />
+                            <TextField className="input" variant="outlined" label="Wohnort" />
                         </div>
                         <div className="group">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Performance</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Leistung</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={age}
-                                    label="Performance"
+                                    label="Leistung"
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={10}>Ten</MenuItem>
@@ -111,12 +111,12 @@ const RegisterForm = () => {
                                 </Select>
                             </FormControl>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Notification type</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Benachrichtigungsart</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={age}
-                                    label="Notification type"
+                                    label="Benachrichtigungsart"
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={10}>E-Mail</MenuItem>
@@ -127,17 +127,17 @@ const RegisterForm = () => {
                         </div>
                         <div className="leagal">
                             <div className="heading">
-                                LEGAL NOTICE
+                                RECHTLICHE HINWEISE
                             </div>
                             <div className="notice">
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox defaultChecked />} label="I have read the privacy policy  for booking the Corona Antigen rapid test and I  accept it." />
-                                    <FormControlLabel control={<Checkbox defaultChecked />} label="I consent to a corona test being carried out." />
-                                    <FormControlLabel control={<Checkbox defaultChecked />} label="I have read the  terms  and conditions and the  right of withdrawal  and accept them." />
+                                    <FormControlLabel control={<Checkbox defaultChecked />} label="Ich habe die Datenschutzbestimmung für die Buchung des Corona Antigen-Schnelltest zur Kenntnis genommen und akzeptiere diese." />
+                                    <FormControlLabel control={<Checkbox defaultChecked />} label="Ich stimme der Durchführung eines Corona Tests zu." />
+                                    <FormControlLabel control={<Checkbox defaultChecked />} label="Ich habe die AGBs und die Wiederrufsrechterklärung zur Kenntnis genommen und akzeptiere diese." />
                                 </FormGroup>
                             </div>
                         </div>
-                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > send </Button>
+                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > abschicken </Button>
                     </div>
                 </div>
             </div>

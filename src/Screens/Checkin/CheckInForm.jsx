@@ -50,15 +50,15 @@ const CheckInForm = () => {
                         </div>
 
                         <div className="one">
-                            <TextField className="input" variant="outlined" label="First Name" />
+                            <TextField className="input" variant="outlined" label="Vorname" />
                         </div>
                         <div className="one">
-                            <TextField className="input" variant="outlined" label="Last Name" />
+                            <TextField className="input" variant="outlined" label="Nachname" />
                         </div>
                         <div className="one">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
-                                    label="Date of Birth"
+                                    label="Geburtsdatum"
                                     inputFormat="MM/dd/yyyy"
                                     value={date}
                                     onChange={enteringDate}
@@ -68,12 +68,12 @@ const CheckInForm = () => {
                         </div>
                         <div className="one">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Location</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={age}
-                                    label="Location"
+                                    label="Auswählen"
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={10}>Ten</MenuItem>
@@ -82,7 +82,7 @@ const CheckInForm = () => {
                                 </Select>
                             </FormControl>
                         </div>
-                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > send </Button>
+                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" }} onClick={go} > abschicken </Button>
                     </div>
                 </div>
             </div>
