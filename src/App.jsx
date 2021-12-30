@@ -6,6 +6,7 @@ import CheckInForm from './Screens/Checkin/CheckInForm'
 
 import "./App.scss"
 import 'react-phone-number-input/style.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     return (

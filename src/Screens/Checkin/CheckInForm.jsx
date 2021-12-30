@@ -18,6 +18,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import { checkIn } from "../../api/form"
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import Back from "../../assets/checkin.jpeg"
 
 import "./CheckInForm.scss"
@@ -30,7 +32,6 @@ const CheckInForm = () => {
         lastName: "",
         date: "",
         town: ''
-
     })
 
     const [date, setDate] = useState(new Date())
@@ -66,14 +67,63 @@ const CheckInForm = () => {
     }
 
     const go = async () => {
-        let res = await checkIn(enteredData)
-        if (res.error != null) {
-            alert("Error")
+        if (!enteredData.firstName || !enteredData.lastName || !enteredData.date || !enteredData.town) {
+            toast.warn('Please fill all the fields Carefully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+
+            let res = await checkIn(enteredData)
+            if (res.error != null) {
+                toast.error('Something wen Wrong', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                toast.success('Application submit Success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setEnteredData({
+                    firstName: "",
+                    lastName: "",
+                    date: "",
+                    town: ''
+                })
+            }
         }
     }
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <ToastContainer />
             <div className="checkinform_container">
                 <div className="header">
                     <img src={Back} alt="ERROR" />

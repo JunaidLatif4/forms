@@ -22,6 +22,8 @@ import Back from "../../assets/registration.jpeg"
 
 import { register } from "../../api/form"
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import "./RegisterForm.scss"
 
 const RegisterForm = () => {
@@ -94,15 +96,79 @@ const RegisterForm = () => {
     }
 
     const go = async () => {
-        let res = await register(enteredData)
-        if (res.error != null) {
-            alert("error")
+        if (!enteredData.first_name || !enteredData.last_name || !enteredData.email || !enteredData.street || !enteredData.street_number || !enteredData.zip_code || !enteredData.towncity || !enteredData.report_preference || !enteredData.test_name || !enteredData.phone_number || !enteredData.date_of_birth) {
+            toast.warn('Please fill all the fields Carefully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            let res = await register(enteredData)
+            if (res.error != null) {
+                toast.error('Something wen Wrong', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                toast.success('Application submit Success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setEnteredData({
+                    name: "",
+                    full_name: "",
+
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    id_number: "",
+                    street: "",
+                    street_number: "",
+                    zip_code: '',
+                    towncity: "",
+                    report_preference: "",
+                    test_name: "",
+
+                    date_of_birth: '',
+                    phone_number: "",
+
+                    create_lab_test: "1",
+                    appointment: null,
+                    active_subscription: 'Active'
+                })
+            }
         }
     }
 
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <ToastContainer />
             <div className="registerform_container">
                 <div className="header">
                     <img src={Back} alt="ERROR" />
