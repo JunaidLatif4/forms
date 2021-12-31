@@ -15,6 +15,7 @@ import Button from "@mui/material/Button/Button";
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import deLocale from 'date-fns/locale/de'
 
 import PhoneInput from 'react-phone-number-input'
 
@@ -474,7 +475,7 @@ const RegisterForm = () => {
                             </div>
                         </div>
                         <div className="one">
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={deLocale} >
                                 <DesktopDatePicker
                                     label="Geburtsdatum"
                                     inputFormat="dd/MM/yyyy"
