@@ -30,7 +30,7 @@ const CheckInForm = () => {
     const [enteredData, setEnteredData] = useState({
         firstName: "",
         lastName: "",
-        date: "",
+        date: new Date("01-01-1980"),
         town: ''
     })
 
@@ -59,7 +59,7 @@ const CheckInForm = () => {
         })
     }
     const enteringDate = (value) => {
-        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
+        let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
         setEnteredData((preValue) => {
             return {
                 ...preValue,
@@ -170,24 +170,6 @@ const CheckInForm = () => {
                         <div className="title">
                             CHECK-IN FORM
                         </div>
-
-                        <div className="one">
-                            <TextField name='firstName' value={enteredData.firstName} onChange={enteringData} className="input" variant="outlined" label="Vorname" />
-                        </div>
-                        <div className="one">
-                            <TextField name='lastName' value={enteredData.lastName} onChange={enteringData} className="input" variant="outlined" label="Nachname" />
-                        </div>
-                        <div className="one">
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DesktopDatePicker
-                                    label="Geburtsdatum"
-                                    inputFormat="dd/MM/yyyy"
-                                    value={enteredData.date}
-                                    onChange={enteringDate}
-                                    renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
-                                />
-                            </LocalizationProvider>
-                        </div>
                         <div className="one">
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Standort</InputLabel>
@@ -206,7 +188,24 @@ const CheckInForm = () => {
                                 </Select>
                             </FormControl>
                         </div>
-                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem" , width:"200px" , alignSelf:"center" }} onClick={go} > abschicken </Button>
+                        <div className="one">
+                            <TextField name='firstName' value={enteredData.firstName} onChange={enteringData} className="input" variant="outlined" label="Vorname" />
+                        </div>
+                        <div className="one">
+                            <TextField name='lastName' value={enteredData.lastName} onChange={enteringData} className="input" variant="outlined" label="Nachname" />
+                        </div>
+                        <div className="one">
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DesktopDatePicker
+                                    label="Geburtsdatum"
+                                    inputFormat="dd/MM/yyyy"
+                                    value={enteredData.date}
+                                    onChange={enteringDate}
+                                    renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
+                                />
+                            </LocalizationProvider>
+                        </div>
+                        <Button style={{ backgroundColor: "#1976d2", color: 'white', fontSize: "1.1rem", width: "200px", alignSelf: "center" }} onClick={go} > abschicken </Button>
                     </div>
                 </div>
             </div>

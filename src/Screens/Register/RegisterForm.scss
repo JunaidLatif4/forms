@@ -4,7 +4,7 @@
 
   .header {
     position: relative;
-    height: 250px;
+    height: 145px;
     display: flex;
     align-items: center;
     box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.5);
@@ -76,18 +76,21 @@
       }
       .notice {
         margin: 0 0.5rem;
+        .MuiTypography-root {
+          font-size: 0.9rem;
+        }
       }
     }
 
-    .cemail_b{
+    .cemail_b {
       position: relative;
       width: -webkit-fill-available;
-      p{
+      p {
         position: absolute;
         top: 41px;
-    left: 9px;
+        left: 9px;
         color: red;
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
   }
@@ -102,6 +105,14 @@
       }
       .phone_input {
         height: 60px;
+      }
+
+      .leagal {
+        .notice {
+          .MuiTypography-root {
+            font-size: 0.7rem;
+          }
+        }
       }
     }
   }

@@ -45,7 +45,7 @@ const RegisterForm = () => {
         report_preference: "",
         test_name: "",
 
-        date_of_birth: '',
+        date_of_birth: new Date("01-01-1980"),
         phone_number: "",
 
         create_lab_test: "1",
@@ -97,7 +97,7 @@ const RegisterForm = () => {
     }
 
     const enteringDate = (value) => {
-        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
+        let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
         setEnteredData((preValue) => {
             return {
                 ...preValue,
@@ -441,14 +441,6 @@ const RegisterForm = () => {
                             ANMELDUNG FORM
                         </div>
                         <div className="one">
-
-                        </div>
-                        <div className="group">
-                            <TextField error={error.first_name} onChange={enteringData} value={enteredData.first_name} name='first_name' className="input" variant="outlined" label="Vorname" />
-                            <TextField error={error.last_name} onChange={enteringData} value={enteredData.last_name} name='last_name' className="input" variant="outlined" label="Nachname" />
-                        </div>
-                        <div className="group">
-                            <PhoneInput placeholder='Handynummer' className='phone_input' value={enteredData.phone_number} onChange={enteringNumber} defaultCountry='DE' />
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Standort</InputLabel>
                                 <Select
@@ -467,13 +459,21 @@ const RegisterForm = () => {
                             </FormControl>
                         </div>
                         <div className="group">
+                            <TextField error={error.first_name} onChange={enteringData} value={enteredData.first_name} name='first_name' className="input" variant="outlined" label="Vorname" />
+                            <TextField error={error.last_name} onChange={enteringData} value={enteredData.last_name} name='last_name' className="input" variant="outlined" label="Nachname" />
+                        </div>
+                        <div className="group">
+                            <PhoneInput placeholder='Handynummer' className='phone_input' value={enteredData.phone_number} onChange={enteringNumber} defaultCountry='DE' />
+                            <TextField error={error.id_number} onChange={enteringData} value={enteredData.id_number} name='id_number' className="input" variant="outlined" label="Personalausweisnummer" />
+                        </div>
+                        <div className="group">
                             <TextField error={error.email} onChange={enteringData} value={enteredData.email} name='email' className="input" variant="outlined" label="Email" />
                             <div className="cemail_b">
                                 <TextField error={error.cemail} onChange={enteringData} value={enteredData.cemail} name='cemail' className="input" variant="outlined" label="Confirm Email" />
                                 {error.cemail && <p> {error.cemail} </p>}
                             </div>
                         </div>
-                        <div className="group">
+                        <div className="one">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
                                     label="Geburtsdatum"
@@ -483,7 +483,6 @@ const RegisterForm = () => {
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
                             </LocalizationProvider>
-                            <TextField error={error.id_number} onChange={enteringData} value={enteredData.id_number} name='id_number' className="input" variant="outlined" label="Personalausweisnummer" />
                         </div>
                         <div className="group">
                             <TextField error={error.street} onChange={enteringData} value={enteredData.street} name="street" className="input" variant="outlined" label="Straße" />
