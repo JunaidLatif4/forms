@@ -31,10 +31,10 @@ const CheckInForm = () => {
     const [enteredData, setEnteredData] = useState({
         firstName: "",
         lastName: "",
-        date: new Date("01-01-1980"),
+        date: "01-01-1980",
         town: ''
     })
-
+    const [pickerDate, setPickerDate] = useState(new Date("01.01.1980"))
     const [error, setError] = useState({
         date: false,
         town: false
@@ -60,6 +60,7 @@ const CheckInForm = () => {
         })
     }
     const enteringDate = (value) => {
+        setPickerDate(value)
         let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
         setEnteredData((preValue) => {
             return {
@@ -198,9 +199,10 @@ const CheckInForm = () => {
                         <div className="one">
                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={deLocale} >
                                 <DesktopDatePicker
+                                    // mask={'__.__.____'}
                                     label="Geburtsdatum"
-                                    inputFormat="dd/MM/yyyy"
-                                    value={enteredData.date}
+                                    inputFormat="dd.MM.yyyy"
+                                    value={pickerDate}
                                     onChange={enteringDate}
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />

@@ -46,7 +46,7 @@ const RegisterForm = () => {
         report_preference: "",
         test_name: "",
 
-        date_of_birth: new Date("01-01-1980"),
+        date_of_birth: "01-01-1980",
         phone_number: "",
 
         create_lab_test: "1",
@@ -75,8 +75,7 @@ const RegisterForm = () => {
         place: false
     })
 
-    const [date, setDate] = useState("")
-    const [number, setNumber] = useState("")
+    const [pickerDate, setPickerDate] = useState(new Date("01.01.1980"))
 
     const enteringSelect = (event) => {
         let { name, value } = event.target
@@ -98,6 +97,7 @@ const RegisterForm = () => {
     }
 
     const enteringDate = (value) => {
+        setPickerDate(value)
         let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
         setEnteredData((preValue) => {
             return {
@@ -477,9 +477,10 @@ const RegisterForm = () => {
                         <div className="one">
                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={deLocale} >
                                 <DesktopDatePicker
+                                    // mask={'__.__.____'}
                                     label="Geburtsdatum"
-                                    inputFormat="dd/MM/yyyy"
-                                    value={enteredData.date_of_birth}
+                                    inputFormat="dd.MM.yyyy"
+                                    value={pickerDate}
                                     onChange={enteringDate}
                                     renderInput={(params) => <TextField {...params} style={{ width: "-webkit-fill-available" }} />}
                                 />
