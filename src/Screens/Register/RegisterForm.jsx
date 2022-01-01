@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom"
 
 import TextField from "@mui/material/TextField/TextField"
@@ -98,7 +98,8 @@ const RegisterForm = () => {
 
     const enteringDate = (value) => {
         setPickerDate(value)
-        let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
+        // let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
+        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
         setEnteredData((preValue) => {
             return {
                 ...preValue,
@@ -415,6 +416,25 @@ const RegisterForm = () => {
         }
     }
 
+    useEffect(() => {
+        if (enteredData.email) {
+            if (enteredData.cemail != enteredData.email) {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        cemail: "Email doesn't match"
+                    }
+                })
+            } else {
+                setError((preValue) => {
+                    return {
+                        ...preValue,
+                        cemail: false
+                    }
+                })
+            }
+        }
+    }, [enteredData])
 
     return (
         <>
