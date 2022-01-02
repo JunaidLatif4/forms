@@ -61,7 +61,8 @@ const CheckInForm = () => {
     }
     const enteringDate = (value) => {
         setPickerDate(value)
-        let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
+        // let createTime = `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
+        let createTime = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`
         setEnteredData((preValue) => {
             return {
                 ...preValue,
@@ -129,7 +130,7 @@ const CheckInForm = () => {
                     progress: undefined,
                 });
             } else {
-                toast.success('Application submit Success', {
+                toast.success(`Test ID = ${res.data.data.lab_test_id}`, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -144,6 +145,9 @@ const CheckInForm = () => {
                     date: "",
                     town: ''
                 })
+                setTimeout(() => {
+                    window.location.href = "https://dev.coronatestpoint.de/qr-thankyou/"
+                }, 2000);
             }
         }
     }
@@ -184,9 +188,9 @@ const CheckInForm = () => {
                                     name='town'
                                     error={error.town}
                                 >
-                                    <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
-                                    <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
-                                    <MenuItem value={"Quellental - Pinneberg"}>Quellental - Pinneberg</MenuItem>
+                                    <MenuItem value={"Am Marktplatz"}>Am Marktplatz - Pinneberg</MenuItem>
+                                    <MenuItem value={"Westring"}>Westring - Pinneberg</MenuItem>
+                                    <MenuItem value={"Quellental"}>Quellental - Pinneberg</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

@@ -473,9 +473,9 @@ const RegisterForm = () => {
                                     name='towncity'
                                     error={error.towncity}
                                 >
-                                    <MenuItem value={"Am Marktplatz - Pinneberg"}>Am Marktplatz - Pinneberg</MenuItem>
-                                    <MenuItem value={"Westring - Pinneberg"}>Westring - Pinneberg</MenuItem>
-                                    <MenuItem value={"Quellental - Pinneberg"}>Quellental - Pinneberg</MenuItem>
+                                    <MenuItem value={"Am Marktplatz"}>Am Marktplatz - Pinneberg</MenuItem>
+                                    <MenuItem value={"Westring"}>Westring - Pinneberg</MenuItem>
+                                    <MenuItem value={"Quellental"}>Quellental - Pinneberg</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -540,7 +540,7 @@ const RegisterForm = () => {
                                     name='report_preference'
                                     error={error.report_preference}
                                 >
-                                    <MenuItem value={"E-Mail"}>E-Mail</MenuItem>
+                                    <MenuItem value={"Email"}>Email</MenuItem>
                                     <MenuItem value={"SMS"}>SMS</MenuItem>
                                     <MenuItem value={"Print"}>Print</MenuItem>
                                 </Select>
