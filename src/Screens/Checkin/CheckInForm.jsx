@@ -130,24 +130,16 @@ const CheckInForm = () => {
                     progress: undefined,
                 });
             } else {
-                toast.success(`Test ID = ${res.data.data.lab_test_id}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                setEnteredData({
-                    firstName: "",
-                    lastName: "",
-                    date: "",
-                    town: ''
-                })
-                setTimeout(() => {
-                    window.location.href = "https://dev.coronatestpoint.de/qr-thankyou/"
-                }, 2000);
+                // toast.success(`Test ID = ${res.data.data.lab_test_id}`, {
+                //     position: "top-right",
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                // });
+                history.push(`/qr?id=${res.data.data.lab_test_id}`)
             }
         }
     }

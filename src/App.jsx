@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom"
 
 import RegisterForm from './Screens/Register/RegisterForm'
 import CheckInForm from './Screens/Checkin/CheckInForm'
+import QrPage from './Screens/QRPage/QrPage'
 
 import "./App.scss"
 import 'react-phone-number-input/style.css'
@@ -15,6 +16,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={RegisterForm} />
                     <Route path="/checkin" component={CheckInForm} />
+                    <Route path="/qr" component={QrPage} />
                 </Switch>
             </div>
         </>
