@@ -120,7 +120,7 @@ const CheckInForm = () => {
 
             let res = await checkIn(enteredData)
             if (res.error != null) {
-                toast.error('Something wen Wrong', {
+                toast.error(res.error, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,

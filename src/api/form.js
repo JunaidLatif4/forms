@@ -24,7 +24,18 @@ let register = async (val) => {
         resolved.data = res.data
 
     } catch (err) {
-        resolved.error = "Somthing went Wrong"
+        if (err.response) {
+            if (err.response.data.exc_type == "ValidationError") {
+                let errorArr = JSON.parse(err.response.data._server_messages)
+                let jsonData = JSON.parse(errorArr[0])
+
+                resolved.error = jsonData.message
+            } else {
+                resolved.error = err.response.data.message
+            }
+        } else {
+            resolved.error = "Somthing went Wrong"
+        }
     }
 
     return resolved
@@ -59,7 +70,11 @@ let checkIn = async (val) => {
         resolved.data = res.data
 
     } catch (err) {
-        resolved.error = "Somthing went Wrong"
+        if (err.response) {
+            resolved.error = err.response.data.message
+        } else {
+            resolved.error = "Somthing went Wrong"
+        }
     }
 
     return resolved
