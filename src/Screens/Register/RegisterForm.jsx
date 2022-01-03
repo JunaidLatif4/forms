@@ -21,7 +21,7 @@ import PhoneInput from 'react-phone-number-input'
 
 import Back from "../../assets/registration.jpeg"
 
-import { register } from "../../api/form"
+import { register, checkIn } from "../../api/form"
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -389,29 +389,51 @@ const RegisterForm = () => {
                     draggable: true,
                     progress: undefined,
                 });
-                setEnteredData({
-                    name: "",
-                    full_name: "",
+                let val = {
+                    firstName: enteredData.first_name,
+                    lastName: enteredData.last_name,
+                    town: enteredData.towncity,
+                    date: enteredData.date_of_birth,
+                }
+                let res = await checkIn(val)
+                if (res.error != null) {
+                    toast.error(res.error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                } else {
+                    history.push(`/qr?id=${res.data.data.lab_test_id}`)
+                }
 
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    cemail: "",
-                    id_number: "",
-                    street: "",
-                    street_number: "",
-                    zip_code: '',
-                    towncity: "",
-                    report_preference: "",
-                    test_name: "",
+                // console.log("DATA ====== ", res.data);
+                // setEnteredData({
+                //     name: "",
+                //     full_name: "",
 
-                    date_of_birth: '',
-                    phone_number: "",
+                //     first_name: "",
+                //     last_name: "",
+                //     email: "",
+                //     cemail: "",
+                //     id_number: "",
+                //     street: "",
+                //     street_number: "",
+                //     zip_code: '',
+                //     towncity: "",
+                //     report_preference: "",
+                //     test_name: "",
 
-                    create_lab_test: "1",
-                    appointment: null,
-                    active_subscription: 'Active'
-                })
+                //     date_of_birth: '',
+                //     phone_number: "",
+
+                //     create_lab_test: "1",
+                //     appointment: null,
+                //     active_subscription: 'Active'
+                // })
             }
         }
     }

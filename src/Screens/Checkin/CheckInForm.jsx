@@ -117,7 +117,6 @@ const CheckInForm = () => {
 
 
         } else {
-
             let res = await checkIn(enteredData)
             if (res.error != null) {
                 toast.error(res.error, {
@@ -130,15 +129,6 @@ const CheckInForm = () => {
                     progress: undefined,
                 });
             } else {
-                // toast.success(`Test ID = ${res.data.data.lab_test_id}`, {
-                //     position: "top-right",
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     progress: undefined,
-                // });
                 history.push(`/qr?id=${res.data.data.lab_test_id}`)
             }
         }
